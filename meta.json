@@ -16,5 +16,5 @@
             "label": "Author"
         }
     },
-    "completeMessage": "To get started:\n\n  cd {{destDirName}}\n  yarn install\n yarn serve"
+    "completeMessage": "To get started:\n\n  cd {{destDirName}}\n  yarn install\n  yarn serve"
 }
