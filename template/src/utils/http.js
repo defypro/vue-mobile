@@ -1,48 +1,28 @@
-import axios from 'axios'
-import { apiUrl } from "@/config";
+import axios from "axios";
 
-// allow use http client without Vue instance
-const http = axios.create({
-    baseURL: apiUrl,
-    timeout: 10000
-});
-
-http.interceptors.request.use(
-    config => {
-        // config.withCredentials = true // 需要跨域打开此配置
-        return config
-    },
-    error => {
-        return Promise.reject(error)
-    }
-);
-
-http.interceptors.response.use(
-    response => {
-        return response.data
-    },
-    error => {
-        if (!error['response']) {
-            return Promise.reject(error)
+function createHttp(options = {}) {
+    const _axios = axios.create(options);
+    _axios.interceptors.response.use(
+        response => {
+            console.log('%c Request Success:', 'color: #4CAF50; font-weight: bold', response);
+            const {data} = response;
+            return data
+        },
+        error => {
+            console.log('%c Request Error:', 'color: #EC6060; font-weight: bold', error.response);
+            if (!error['response']) {
+                return Promise.reject(error)
+            }
+            return Promise.reject(error.response);
         }
-
-        switch (error.response.status) {
-            case 403:
-                break;
-            case 401:
-                break;
-            case 422:
-                break;
-            case 412:
-                break;
-        }
-
-        return Promise.reject(error.response);
-    }
-);
-
-export function setToken(token) {
-    http.defaults.headers.common.Authorization = `${token}`;
+    );
+    return _axios;
 }
 
-export default http
+const http = createHttp();
+
+http.create = function (options) {
+    return createHttp(options);
+};
+
+export default http;
