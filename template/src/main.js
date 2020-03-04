@@ -9,6 +9,7 @@ import VueAwesomeSwiper from 'vue-awesome-swiper'
 import 'swiper/dist/css/swiper.css'
 import validate from '@/utils/validate'
 import http from '@/utils/http'
+import api from '@/api'
 
 Vue.use(Vant);
 Vue.use(LayerLite);
@@ -16,6 +17,7 @@ Vue.use(VueAwesomeSwiper);
 
 Vue.prototype.$validate = validate;
 Vue.prototype.$http = http;
+Vue.prototype.$api = api;
 
 Vue.config.productionTip = false;
 if (process.env.VUE_APP_API_ENV !== 'pro') {
