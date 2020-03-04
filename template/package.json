@@ -8,7 +8,7 @@
     "build:uat": "cross-env VUE_APP_API_ENV=uat vue-cli-service build",
     "build:dev": "cross-env VUE_APP_API_ENV=dev vue-cli-service build",
     "build:all": "yarn build && yarn build:uat",
-    "font": "node ./fonts/fontmin.js"
+    "fontmin": "node ./fontmin/fontmin.js"
   },
   "dependencies": {
     "@defy/helper-js": "^0.0.6",
