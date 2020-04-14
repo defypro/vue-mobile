@@ -33,9 +33,6 @@ function defineProperty(target, key, http) {
                         url,
                         [IS_GET ? 'params' : 'data']: params,
                     });
-                    if (res.systemState === "013" || res.systemState === "012" || res.systemState === "010") {
-                        return await req(params, isQuery);
-                    }
                     return Promise.resolve(res);
                 } catch (e) {
                     return Promise.reject(e);
