@@ -8,6 +8,7 @@ const productionGzipExtensions = ['js', 'css', 'html'];
 const isProduction = process.env.NODE_ENV === 'production';
 const pjson = require('./package.json');
 const outputDir = './dist/' + pjson.name + (process.env.VUE_APP_API_ENV === 'uat' ? "-UAT" : "-PRODUCTION") + "-" + pjson.version;
+let devServer = fs.existsSync(resolve('./devServer.js')) ? require('./devServer') : {};
 
 module.exports = {
     publicPath: '/',
@@ -74,14 +75,5 @@ module.exports = {
     },
     parallel: os.cpus().length > 1,
     lintOnSave: false,
-    devServer: {
-        // port: 8802,
-        // proxy: {
-        //     '*': {
-        //         target: '*',
-        //         changeOrigin: true
-        //     }
-        // },
-        // disableHostCheck: true,
-    },
+    devServer,
 };
