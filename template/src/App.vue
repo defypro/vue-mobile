@@ -7,7 +7,7 @@
     </div>
 </template>
 <script>
-    import helperJS from '@defy/helper-js'
+    import helperJS from '@ccn-dm/helper-js'
 
     export default {
         name: "App",

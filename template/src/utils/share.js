@@ -1,7 +1,12 @@
-import helperJS from '@defy/helper-js'
-import api from '@/api'
+import helperJS from '@ccn-dm/helper-js'
 
 let _callback = null;
+
+function GetWxJSSDK() {
+    return new Promise((resolve, reject) => {
+        resolve({result: {}});
+    });
+}
 
 export default (callback = () => {
 }) => {
@@ -13,9 +18,7 @@ export default (callback = () => {
 
     function getJSSDKConfig() {
         if (errorCount >= 1) return;
-        api.GetWxJSSDK({
-            Url: url,
-        }).then(({result}) => {
+        GetWxJSSDK.then(({result}) => {
             isError = false;
             const {appId, timestamp, nonceStr, signature} = result;
             wx.config({
@@ -81,12 +84,6 @@ export default (callback = () => {
     function setMenu() {
         wx.hideAllNonBaseMenuItem();
         console.warn('hideAllNonBaseMenuItem');
-        // wx.showMenuItems({
-        //     menuList: [
-        //         "menuItem:share:appMessage",
-        //         "menuItem:share:timeline"
-        //     ]
-        // });
     }
 
     wx.error(function (res) {

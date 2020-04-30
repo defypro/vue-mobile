@@ -1,5 +1,4 @@
 import {loading, toast} from '@/components/LayerLite';
-import api from '../api'
 
 export default {
     bind: function (el, binding) {
@@ -13,30 +12,19 @@ export default {
                 return;
             }
             loading.open();
-            api.SendMessagesNew({
-                userinfo: {
-                    usermobile: mobile,
-                    bussinessType: "1",
-                    notifytype: "1",
-                    "clientip": "10.20.26.35"
-                },
-            }).then(({status, msg}) => {
+            setTimeout(() => {
                 loading.close();
-                if (status !== '10000') {
-                    toast(msg || '验证码发送失败');
-                } else {
-                    let time = 59;
-                    el.innerText = time + 'S';
-                    timer = setInterval(() => {
-                        el.innerText = --time + 'S';
-                        if (time === 0) {
-                            clearInterval(timer);
-                            timer = null;
-                            el.innerText = '获取验证码';
-                        }
-                    }, 1000);
-                }
-            })
+                let time = 59;
+                el.innerText = time + 'S';
+                timer = setInterval(() => {
+                    el.innerText = --time + 'S';
+                    if (time === 0) {
+                        clearInterval(timer);
+                        timer = null;
+                        el.innerText = '获取验证码';
+                    }
+                }, 1000);
+            });
         };
     },
     update(el, binding) {
