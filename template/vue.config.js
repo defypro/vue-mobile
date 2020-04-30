@@ -1,5 +1,6 @@
 const path = require('path');
 const os = require('os');
+const fs = require('fs');
 const resolve = dir => path.join(__dirname, dir);
 const CompressionWebpackPlugin = require('compression-webpack-plugin');
 const FileManagerPlugin = require('filemanager-webpack-plugin');
