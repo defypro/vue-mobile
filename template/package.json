@@ -16,6 +16,7 @@
     "axios": "^0.19.2",
     "better-scroll": "^1.15.2",
     "core-js": "^3.6.4",
+    "dayjs": "^1.8.26",
     "postcss-px-to-viewport": "^1.1.1",
     "vant": "^2.5.2",
     "vconsole": "^3.3.4",
@@ -31,6 +32,7 @@
     "cross-env": "^7.0.1",
     "filemanager-webpack-plugin": "^2.0.5",
     "fontmin": "^0.9.8",
+    "hard-source-webpack-plugin": "^0.13.1",
     "rimraf": "^3.0.2",
     "vue-template-compiler": "^2.6.11"
   }

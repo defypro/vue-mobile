@@ -4,6 +4,7 @@ const fs = require('fs');
 const resolve = dir => path.join(__dirname, dir);
 const CompressionWebpackPlugin = require('compression-webpack-plugin');
 const FileManagerPlugin = require('filemanager-webpack-plugin');
+const HardSourceWebpackPlugin = require('hard-source-webpack-plugin');
 const AddAssetHtmlPlugin = require('add-asset-html-webpack-plugin');
 const productionGzipExtensions = ['js', 'css', 'html'];
 const isProduction = process.env.NODE_ENV === 'production';
@@ -46,6 +47,10 @@ module.exports = {
         //     };
         //     return options;
         // }).end();
+
+        config.plugin('HardSourceWebpackPlugin').use(
+            new HardSourceWebpackPlugin()
+        );
 
         config.plugin('AddAssetHtmlPlugin').use(new AddAssetHtmlPlugin({
             filepath: path.resolve(__dirname, './public/static/fonts/*.css'),

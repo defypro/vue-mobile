@@ -17,6 +17,6 @@
         methods: {},
         mounted() {
             helperJS.platform.mobileInit();
-        }
+        },
     }
 </script>
