@@ -1,11 +1,14 @@
 const fs = require('fs');
 const path = require('path');
 const crypto = require('crypto');
+const chalk = require('chalk')
 const rimraf = require('rimraf');
 const resolve = dir => path.join(__dirname, dir);
 const Fontmin = require('fontmin');
 const fontCSSPath = resolve('../public/static/fonts/font.css');
 
+const error = chalk.red;
+const success = chalk.green;
 
 function isFile(path) {
     try {
@@ -53,13 +56,16 @@ function run(src, dest, name) {
     }).join('');
 
     const fontmin = new Fontmin()
-        .src(src + '/*.ttf')
+        .src([src + '/*.ttf'])
         .use(Fontmin.glyph(pluginOpts))
         .use(Fontmin.ttf2woff(pluginOpts))
         .dest(dest);
     fontmin.run(function (err) {
         if (err) {
             throw err;
+        }
+        if (!isDirectory(dest)) {
+            return console.log(error(`${name} complete error`));
         }
         const files = fs.readdirSync(dest);
         let fontCss = '';
@@ -89,8 +95,6 @@ function run(src, dest, name) {
         } else {
             fs.appendFileSync(fontCSSPath, fontCss, 'utf8');
         }
-        // console.log(fontCss);
-        console.log(`${name} complete success`);
+        console.log(success(`${name} complete success`));
     });
 }
-
